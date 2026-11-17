@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roadwise – Driving School Management</title>
+  <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside>
+    <div class="brand">Wheel Wise Academy</div>
+    <div class="lane"></div>
+    <nav>
+      <button class="on" data-view="dashboard">Dashboard</button>
+      <button data-view="students">Students</button>
+      <button data-view="instructors">Instructors</button>
+      <button data-view="vehicles">Vehicles</button>
+      <button data-view="lessons">Lessons</button>
+      <button data-view="payments">Payments</button>
+    </nav>
+  </aside>
+
+  <main>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="section active">
+      <h1>Dashboard</h1>
+      <div class="stats">
+        <div class="stat"><b id="st-students">0</b><span>Students enrolled</span></div>
+        <div class="stat"><b id="st-instructors">0</b><span>Instructors</span></div>
+        <div class="stat"><b id="st-vehicles">0</b><span>Vehicles</span></div>
+        <div class="stat"><b id="st-collected">₹0</b><span>Fees collected</span></div>
+        <div class="stat"><b id="st-pending">₹0</b><span>Fees pending</span></div>
+      </div>
+      <div class="panel">
+        <h2>Today’s lessons</h2>
+        <div class="wrap">
+          <table>
+            <thead><tr><th>Time</th><th>Student</th><th>Instructor</th><th>Vehicle</th><th>Status</th></tr></thead>
+            <tbody id="rows-today"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDENTS -->
+    <section id="students" class="section">
+      <h1>Students</h1>
+      <div class="panel">
+        <form data-form="students">
+          <label>Full name <input name="name" type="text" required></label>
+          <label>Phone <input name="phone" type="tel"></label>
+          <label>Course
+            <select name="course">
+              <option>Beginner</option><option>Refresher</option><option>Test preparation</option>
+            </select>
+          </label>
+          <label>Course fee (₹) <input name="fee" type="number" min="0" required></label>
+          <button class="btn" type="submit">Add student</button>
+        </form>
+      </div>
+      <div class="panel">
+        <div class="bar">
+          <h2>All students</h2>
+          <input type="search" data-search="students" placeholder="Search students">
+        </div>
+        <div class="wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Phone</th><th>Course</th><th>Fee</th><th>Balance due</th><th></th></tr></thead>
+            <tbody id="rows-students"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTRUCTORS -->
+    <section id="instructors" class="section">
+      <h1>Instructors</h1>
+      <div class="panel">
+        <form data-form="instructors">
+          <label>Full name <input name="name" type="text" required></label>
+          <label>Phone <input name="phone" type="tel"></label>
+          <label>Teaches
+            <select name="speciality"><option>Car</option><option>Two-wheeler</option><option>Both</option></select>
+          </label>
+          <button class="btn" type="submit">Add instructor</button>
+        </form>
+      </div>
+      <div class="panel">
+        <div class="bar">
+          <h2>All instructors</h2>
+          <input type="search" data-search="instructors" placeholder="Search instructors">
+        </div>
+        <div class="wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Phone</th><th>Teaches</th><th></th></tr></thead>
+            <tbody id="rows-instructors"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- VEHICLES -->
+    <section id="vehicles" class="section">
+      <h1>Vehicles</h1>
+      <div class="panel">
+        <form data-form="vehicles">
+          <label>Registration number <input name="reg" type="text" required></label>
+          <label>Model <input name="model" type="text" required></label>
+          <label>Type
+            <select name="type"><option>Car</option><option>Two-wheeler</option></select>
+          </label>
+          <button class="btn" type="submit">Add vehicle</button>
+        </form>
+      </div>
+      <div class="panel">
+        <div class="bar">
+          <h2>All vehicles</h2>
+          <input type="search" data-search="vehicles" placeholder="Search vehicles">
+        </div>
+        <div class="wrap">
+          <table>
+            <thead><tr><th>Registration</th><th>Model</th><th>Type</th><th></th></tr></thead>
+            <tbody id="rows-vehicles"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSONS -->
+    <section id="lessons" class="section">
+      <h1>Lessons</h1>
+      <div class="panel">
+        <form data-form="lessons">
+          <label>Student <select name="student" data-ref="students" required></select></label>
+          <label>Instructor <select name="instructor" data-ref="instructors" required></select></label>
+          <label>Vehicle <select name="vehicle" data-ref="vehicles" required></select></label>
+          <label>Date <input name="date" type="date" required></label>
+          <label>Time <input name="time" type="time" required></label>
+          <button class="btn" type="submit">Add lesson</button>
+        </form>
+      </div>
+      <div class="panel">
+        <div class="bar">
+          <h2>All lessons</h2>
+          <input type="search" data-search="lessons" placeholder="Search lessons">
+        </div>
+        <div class="wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Time</th><th>Student</th><th>Instructor</th><th>Vehicle</th><th>Status</th><th></th></tr></thead>
+            <tbody id="rows-lessons"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAYMENTS -->
+    <section id="payments" class="section">
+      <h1>Payments</h1>
+      <div class="panel">
+        <form data-form="payments">
+          <label>Student <select name="student" data-ref="students" required></select></label>
+          <label>Amount (₹) <input name="amount" type="number" min="1" required></label>
+          <label>Method
+            <select name="method"><option>Cash</option><option>UPI</option><option>Card</option><option>Bank transfer</option></select>
+          </label>
+          <label>Date <input name="date" type="date" required></label>
+          <button class="btn" type="submit">Add payment</button>
+        </form>
+      </div>
+      <div class="panel">
+        <div class="bar">
+          <h2>All payments</h2>
+          <input type="search" data-search="payments" placeholder="Search payments">
+        </div>
+        <div class="wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Student</th><th>Amount</th><th>Method</th><th></th></tr></thead>
+            <tbody id="rows-payments"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    
+    <a href="index.html">Log Out</a>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
